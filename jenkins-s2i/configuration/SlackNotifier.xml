@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<jenkins.plugins.slack.SlackNotifier_-DescriptorImpl plugin="slack@1.8.1-SNAPSHOT">
-  <teamDomain>rh-forum-2018</teamDomain>
-  <token>VqQbrbnXy9wrIhlZTkkzbyM9</token>
-  <room>#monolith</room>
-  <buildServerUrl>https://rh-forum-2018.slack.com/services/hooks/jenkins-ci/</buildServerUrl>
-</jenkins.plugins.slack.SlackNotifier_-DescriptorImpl>
