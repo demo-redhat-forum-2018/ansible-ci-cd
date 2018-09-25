@@ -1,0 +1,6 @@
+SOURCE_REPOSITORY_URL=https://github.com/demo-redhat-forum-2018/ansible-ci-cd.git
+NAME=jenkins
+SOURCE_REPOSITORY_CONTEXT_DIR=jenkins-s2i
+IMAGE_STREAM_NAMESPACE=mono-ci-cd
+SOURCE_REPOSITORY_USERNAME=username
+SOURCE_REPOSITORY_PASSWORD=password
