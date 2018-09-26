@@ -6,12 +6,12 @@ openshift_cluster_content:
     - name: "jenkins"
       namespace: "{{ ci_cd_namespace }}"
       template: "{{ playbook_dir }}/templates/jenkins.yml"
-      params: "{{ playbook_dir }}/params/jenkins"
+      params: "{{ playbook_dir }}/params/jenkins/jenkins"
       tags:
       - jenkins
     - name: "jenkins-s2i"
       namespace: "{{ ci_cd_namespace }}"
       template: "{{ playbook_dir }}/templates/jenkins-s2i.yml"
-      params: "{{ playbook_dir }}/params/jenkins-s2i"
+      params: "{{ playbook_dir }}/params/jenkins/jenkins-s2i"
       tags:
       - jenkins

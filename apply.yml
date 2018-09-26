@@ -3,8 +3,9 @@
   hosts: "{{ target }}"
   vars:
     ci_cd_namespace: mono-ci-cd
+    dev_namespace: mono-dev
     test_namespace: mono-test
-    prod_namespace: mono-dev
+    prod_namespace: mono-prod
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
