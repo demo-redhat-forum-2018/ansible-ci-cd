@@ -5,5 +5,5 @@
   <token>VqQbrbnXy9wrIhlZTkkzbyM9</token>
   <tokenCredentialId></tokenCredentialId>
   <botUser>true</botUser>
-  <room>monolith</room>
+  <room></room>
 </jenkins.plugins.slack.SlackNotifier_-DescriptorImpl>

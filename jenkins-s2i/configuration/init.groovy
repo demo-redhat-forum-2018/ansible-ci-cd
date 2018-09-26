@@ -7,11 +7,10 @@ import com.cloudbees.plugins.credentials.impl.*
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.*
 import hudson.plugins.sshslaves.*;
 
-/*
 domain = Domain.global()
 store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0].getStore()
-gitUsername = System.getenv("GIT_USERNAME") ?: "<USERNAME>"
-gitPassword = System.getenv("GIT_PASSWORD") ?: "<PASSWORD>"
+gitUsername = System.getenv("GIT_USERNAME") ?: "clerixmaxime"
+gitPassword = System.getenv("GIT_PASSWORD") ?: "c909be7a8843961272d586ee5065581dad6b0f55"
 
 usernameAndPassword = new UsernamePasswordCredentialsImpl(
   CredentialsScope.GLOBAL,
@@ -22,4 +21,3 @@ usernameAndPassword = new UsernamePasswordCredentialsImpl(
 
 store.addCredentials(domain, usernameAndPassword)
 System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
-*/
