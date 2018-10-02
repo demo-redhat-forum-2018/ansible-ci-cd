@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: openshift-tasks
+message: See https://github.com/nmasse-itix/openshift-tasks for more details.
+metadata:
+  annotations:
+    description: |-
+      A demo application that exhibits the main features of OpenShift. It is written
+      in Java for JBoss EAP 7 and features a CI/CD environment with Blue/Green deployment.
+    openshift.io/display-name: OpenShift Tasks
+    tags: instant-app,jboss,jenkins
+    template.openshift.io/documentation-url: https://github.com/nmasse-itix/openshift-tasks
+    template.openshift.io/long-description: A demo using Java for JBoss EAP 7 and Jenkins, running on OpenShift
+    template.openshift.io/provider-display-name: Nicolas Massé
+    template.openshift.io/support-url: https://github.com/nmasse-itix/openshift-tasks/issues
+  name: openshift-tasks
+objects:
+- kind: "BuildConfig"
+  apiVersion: "v1"
+  metadata:
+    name: "coolstore-monolith-tasks-pipeline"
+    namespace: ${BUILD_PROJECT}
+    labels:
+      template: coolstore-monolith
+  spec:
+    source:
+      git:
+        uri: ${GIT_REPO}
+        ref: sqlserver
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
+        env:
+          - name: OPENSHIFT_IMAGE_STREAM
+            value: coolstore
+          - name: OPENSHIFT_BUILD_CONFIG
+            value: coolstore
+          - name: OPENSHIFT_SERVICE
+            value: coolstore
+          - name: OPENSHIFT_DEPLOYMENT_CONFIG
+            value: coolstore
+          - name: OPENSHIFT_BUILD_PROJECT
+            value: ${BUILD_PROJECT}
+          - name: OPENSHIFT_TEST_ENVIRONMENT
+            value: ${TEST_PROJECT}
+          - name: OPENSHIFT_PROD_ENVIRONMENT
+            value: ${PROD_PROJECT}
+          - name: OPENSHIFT_TEST_URL
+            value: http://${TEST_ROUTE_HOSTNAME}
+          - name: NEXUS_REPO_URL
+            value: ${NEXUS_REPO_URL}
+          - name: NEXUS_MIRROR_URL
+            value: ${NEXUS_MIRROR_URL}
+          - name: NEXUS_USER
+            value: ${NEXUS_USER}
+          - name: NEXUS_PASSWORD
+            value: ${NEXUS_PASSWORD}
+    triggers:
+    - github:
+        secret: secret101
+      type: GitHub
+    - generic:
+        secret: secret101
+      type: Generic
+parameters:
+- description: The name of the OpenShift Project to that holds the dev environment.
+  displayName: Development Environment
+  name: DEV_PROJECT
+  value: mono-dev
+- description: The name of the OpenShift Project to that holds the build environment.
+  displayName: Build Environment
+  name: BUILD_PROJECT
+  value: mono-ci-cd
+- description: The name of the OpenShift Project to that holds the test environment.
+  displayName: Test Environment
+  name: TEST_PROJECT
+  value: mono-test
+- description: The name of the OpenShift Project to that holds the prod environment.
+  displayName: Production Environment
+  name: PROD_PROJECT
+  value: mono-prod
+- description: The GIT repository to use.
+  displayName: GIT Repo URL
+  name: GIT_REPO
+  value:  https://github.com/demo-redhat-forum-2018/monolith.git
+- description: The Nexus repository that will store the software binaries
+  displayName: Nexus Repo URL
+  name: NEXUS_REPO_URL
+  value: http://gitux01.openhybridcloud.io:8081/repository/monolith/
+- description: The Nexus Repository URL for maven mirroring
+  displayName: Nexus Mirror URL
+  name: NEXUS_MIRROR_URL
+  value: http://gitux01.openhybridcloud.io:8081/repository/maven-all-public/
+- description: The Nexus User used to push the software to Nexus
+  displayName: Nexus Username
+  name: NEXUS_USER
+  value: admin
+- description: The password of the Nexus User used to push the software to Nexus
+  displayName: Nexus Password
+  name: NEXUS_PASSWORD
+  value: admin123
