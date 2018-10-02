@@ -27,11 +27,11 @@ objects:
     source:
       git:
         uri: ${GIT_REPO}
-        ref: sqlserver
+        ref: ${GIT_BRANCH}
     strategy:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile
+        jenkinsfilePath: ${JENKINSFILE_PATH}
         env:
           - name: OPENSHIFT_IMAGE_STREAM
             value: coolstore
@@ -85,10 +85,18 @@ parameters:
   displayName: GIT Repo URL
   name: GIT_REPO
   value:  https://github.com/demo-redhat-forum-2018/monolith.git
+- description: The GIT branch to use.
+  displayName: GIT Branch
+  name: GIT_BRANCH
+  value:  master
+- description: Path to the Jenkinsfile to use.
+  displayName: Jenkinsfile Path
+  name: JENKINSFILE_PATH
+  value:  Jenkinsfile
 - description: The Nexus repository that will store the software binaries
   displayName: Nexus Repo URL
   name: NEXUS_REPO_URL
-  value: http://gitux01.openhybridcloud.io:8081/repository/monolith/
+  value: http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/
 - description: The Nexus Repository URL for maven mirroring
   displayName: Nexus Mirror URL
   name: NEXUS_MIRROR_URL
