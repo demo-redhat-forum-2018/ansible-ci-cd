@@ -62,16 +62,16 @@ objects:
         maxUnavailable: 25%
         maxSurge: 25%
       resources: {}
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: false
-        containerNames:
-        - coolstore
-        from:
-          kind: ImageStreamTag
-          namespace: ${IMAGE_NAMESPACE}
-          name: coolstore:${APP_TAG}
+    triggers: []
+    # - type: ImageChange
+    #   imageChangeParams:
+    #     automatic: false
+    #     containerNames:
+    #     - coolstore
+    #     from:
+    #       kind: ImageStreamTag
+    #       namespace: ${IMAGE_NAMESPACE}
+    #       name: coolstore:${APP_TAG}
     replicas: 1
     selector:
       deploymentConfig: coolstore-blue
@@ -85,7 +85,7 @@ objects:
         terminationGracePeriodSeconds: 75
         containers:
         - name: coolstore
-          image: coolstore
+          image: ${EXTERNAL_REGISTRY}:${APP_TAG}
           imagePullPolicy: Always
           lifecycle:
             preStop:
@@ -179,16 +179,16 @@ objects:
         maxUnavailable: 25%
         maxSurge: 25%
       resources: {}
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: false
-        containerNames:
-        - coolstore
-        from:
-          kind: ImageStreamTag
-          namespace: ${IMAGE_NAMESPACE}
-          name: coolstore:${APP_TAG}
+    triggers: []
+    # - type: ImageChange
+    #   imageChangeParams:
+    #     automatic: false
+    #     containerNames:
+    #     - coolstore
+    #     from:
+    #       kind: ImageStreamTag
+    #       namespace: ${IMAGE_NAMESPACE}
+    #       name: coolstore:${APP_TAG}
     replicas: 1
     selector:
       deploymentConfig: coolstore-green
@@ -202,7 +202,7 @@ objects:
         terminationGracePeriodSeconds: 75
         containers:
         - name: coolstore
-          image: coolstore
+          image: ${EXTERNAL_REGISTRY}:${APP_TAG}
           imagePullPolicy: Always
           lifecycle:
             preStop:
@@ -297,4 +297,8 @@ parameters:
 - displayName: Coolstore imageStream 
   name: IMAGE_NAMESPACE
   value: mono-ci-cd
+  required: true
+- displayName: Coolstore imageStream 
+  name: EXTERNAL_REGISTRY
+  value: quay.io/demoforum/coolstore-monolith
   required: true

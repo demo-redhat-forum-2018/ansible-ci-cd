@@ -20,6 +20,26 @@ objects:
     labels:
       application: coolstore
       build: coolstore
+  spec:
+    tags:
+      - name: 'latest'
+        from:
+          kind: DockerImage 
+          name: ${EXTERNAL_REGISTRY}:latest
+        importPolicy:
+          scheduled: true
+      - name: 'latest'
+        from:
+          kind: DockerImage 
+          name: ${EXTERNAL_REGISTRY}:promoteToTest
+        importPolicy:
+          scheduled: true
+      - name: 'latest'
+        from:
+          kind: DockerImage 
+          name: ${EXTERNAL_REGISTRY}:promoteToProd
+        importPolicy:
+          scheduled: true
 - kind: BuildConfig
   apiVersion: v1
   metadata:
@@ -43,10 +63,11 @@ objects:
           namespace: openshift
           name: jboss-eap71-openshift:1.1
     output:
+      pushSecret:
+        name: quay-registry
       to:
-        kind: ImageStreamTag
-        namespace: ""
-        name: coolstore:latest
+        kind: DockerImage
+        name: ${EXTERNAL_REGISTRY}:latest
     triggers:
     - type: ImageChange
     - type: ConfigChange
@@ -58,4 +79,8 @@ parameters:
 - displayName: Git branch for coolstore
   name: COOLSTORE_GIT_BRANCH
   value: sqlserver
+  required: true
+- displayName: Git branch for coolstore
+  name: EXTERNAL_REGISTRY
+  value: quay.io/demoforum/coolstore-monolith
   required: true
