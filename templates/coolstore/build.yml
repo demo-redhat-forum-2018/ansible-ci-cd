@@ -13,33 +13,6 @@ labels:
 message: The resources (build config, imagestreams, etc) for
   building the Coolstore Monolith SQL Server has been created in your project.
 objects:
-- kind: ImageStream
-  apiVersion: v1
-  metadata:
-    name: coolstore
-    labels:
-      application: coolstore
-      build: coolstore
-  spec:
-    tags:
-      - name: 'latest'
-        from:
-          kind: DockerImage 
-          name: ${EXTERNAL_REGISTRY}:latest
-        importPolicy:
-          scheduled: true
-      - name: 'latest'
-        from:
-          kind: DockerImage 
-          name: ${EXTERNAL_REGISTRY}:promoteToTest
-        importPolicy:
-          scheduled: true
-      - name: 'latest'
-        from:
-          kind: DockerImage 
-          name: ${EXTERNAL_REGISTRY}:promoteToProd
-        importPolicy:
-          scheduled: true
 - kind: BuildConfig
   apiVersion: v1
   metadata:
