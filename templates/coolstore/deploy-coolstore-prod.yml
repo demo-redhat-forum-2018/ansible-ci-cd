@@ -26,11 +26,11 @@ objects:
     to:
       kind: Service
       name: coolstore-blue
-      weight: 50
+      weight: 100
     alternateBackends:
     - kind: Service
       name: coolstore-green
-      weight: 50
+      weight: 0
 - kind: Service
   apiVersion: v1
   spec:

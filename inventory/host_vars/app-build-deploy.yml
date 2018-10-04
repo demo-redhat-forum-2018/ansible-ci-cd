@@ -16,8 +16,8 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - coolstore-build
-- object: dev-stage
-  content:
+  # - object: dev-stage
+  # content:
   # - name: sqlserver
   #   template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver-secret.yml"
   #   params: "{{ playbook_dir }}/params/coolstore/deploy-test"
@@ -36,12 +36,12 @@ openshift_cluster_content:
   #   namespace: "{{ dev_namespace }}"
   #   tags:
   #   - coolstore-deploy
-  - name: image-puller-rolebinding
-    template: "{{ playbook_dir }}/templates/rolebinding/image-puller.yml"
-    params: "{{ playbook_dir }}/params/coolstore/role-dev"
-    namespace: "{{ ci_cd_namespace }}"
-    tags:
-    - coolstore-deploy
+  #- name: image-puller-rolebinding
+  #  template: "{{ playbook_dir }}/templates/rolebinding/image-puller.yml"
+  #  params: "{{ playbook_dir }}/params/coolstore/role-dev"
+  #  namespace: "{{ ci_cd_namespace }}"
+  #  tags:
+  #  - coolstore-deploy
 - object: test-stage
   content:
   - name: sqlserver
@@ -68,6 +68,12 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
     - coolstore-deploy
+  - name: jenkins-edit-rolebinding
+    template: "{{ playbook_dir }}/templates/rolebinding/jenkins-edit.yml"
+    params: "{{ playbook_dir }}/params/coolstore/role-jenkins"
+    namespace: "{{ test_namespace }}"
+    tags:
+    - coolstore-deploy
 - object: prod-stage
   content:
   - name: sqlserver
@@ -92,5 +98,11 @@ openshift_cluster_content:
     template: "{{ playbook_dir }}/templates/rolebinding/image-puller.yml"
     params: "{{ playbook_dir }}/params/coolstore/role-prod"
     namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - coolstore-deploy
+  - name: jenkins-edit-rolebinding
+    template: "{{ playbook_dir }}/templates/rolebinding/jenkins-edit.yml"
+    params: "{{ playbook_dir }}/params/coolstore/role-jenkins"
+    namespace: "{{ prod_namespace }}"
     tags:
     - coolstore-deploy

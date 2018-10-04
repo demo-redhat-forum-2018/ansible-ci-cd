@@ -100,7 +100,7 @@ parameters:
 - description: The Nexus Repository URL for maven mirroring
   displayName: Nexus Mirror URL
   name: NEXUS_MIRROR_URL
-  value: http://gitux01.openhybridcloud.io:8081/repository/maven-all-public/
+  value: http://gitux01.openhybridcloud.io:8081/repository/maven-public/
 - description: The Nexus User used to push the software to Nexus
   displayName: Nexus Username
   name: NEXUS_USER
