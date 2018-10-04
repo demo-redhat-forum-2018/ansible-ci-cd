@@ -9,12 +9,6 @@ openshift_cluster_content:
     params: "{{ playbook_dir }}/params/projectrequests/project-requests-ci-cd"
     tags:
     - projects
-  - name: "{{ test_namespace }}"
-    template: "{{ playbook_dir }}/templates/project-requests.yml"
-    template_action: create
-    params: "{{ playbook_dir }}/params/projectrequests/project-requests-test"
-    tags:
-    - projects
   - name: "{{ prod_namespace }}"
     template: "{{ playbook_dir }}/templates/project-requests.yml"
     template_action: create
@@ -25,18 +19,6 @@ openshift_cluster_content:
   content:
   - name: "ci-cd-acl"
     namespace: "{{ ci_cd_namespace }}"
-    template: "{{ playbook_dir }}/templates/rolebinding/rolebinding-group.yml"
-    params: "{{ playbook_dir }}/params/rolebinding-group/all"
-    tags:
-    - rolebinding-group
-  - name: "mono-dev-acl"
-    namespace: "{{ dev_namespace }}"
-    template: "{{ playbook_dir }}/templates/rolebinding/rolebinding-group.yml"
-    params: "{{ playbook_dir }}/params/rolebinding-group/all"
-    tags:
-    - rolebinding-group
-  - name: "mono-dev-acl"
-    namespace: "{{ test_namespace }}"
     template: "{{ playbook_dir }}/templates/rolebinding/rolebinding-group.yml"
     params: "{{ playbook_dir }}/params/rolebinding-group/all"
     tags:
