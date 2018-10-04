@@ -15,3 +15,12 @@ openshift_cluster_content:
       params: "{{ playbook_dir }}/params/jenkins/jenkins-s2i"
       tags:
       - jenkins
+- object: jenkins-slave-nodes
+  content:
+  - name: jenkins-slave-skopeo
+    template: "{{ playbook_dir }}/templates/jenkins/jenkins-slave-generic-template.yml"
+    params: "{{ playbook_dir }}/params/jenkins/slave-skopeo"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+    - jenkins-slaves
+    - slave-skopeo
