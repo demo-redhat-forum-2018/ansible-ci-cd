@@ -55,16 +55,7 @@ objects:
         maxUnavailable: 25%
         maxSurge: 25%
       resources: {}
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: false
-        containerNames:
-        - coolstore
-        from:
-          kind: ImageStreamTag
-          namespace: ${IMAGE_NAMESPACE}
-          name: coolstore:${APP_TAG}
+    triggers: []
     replicas: 1
     selector:
       deploymentConfig: coolstore
@@ -78,7 +69,7 @@ objects:
         terminationGracePeriodSeconds: 75
         containers:
         - name: coolstore
-          image: coolstore
+          image: ${EXTERNAL_REGISTRY}:${APP_TAG}
           imagePullPolicy: Always
           lifecycle:
             preStop:
@@ -173,4 +164,8 @@ parameters:
 - displayName: Coolstore imageStream 
   name: IMAGE_NAMESPACE
   value: mono-ci-cd
+  required: true
+- displayName: QUAY registry
+  name: EXTERNAL_REGISTRY
+  value: quay.io/demoforum/coolstore-monolith
   required: true
