@@ -57,6 +57,20 @@ objects:
             value: ${NEXUS_USER}
           - name: NEXUS_PASSWORD
             value: ${NEXUS_PASSWORD}
+          - name: OVH_URL
+            value: ${OVH_URL}
+          - name: OVH_TOKEN
+            value: ${OVH_TOKEN}
+          - name: AZURE_URL
+            value: ${AZURE_URL}
+          - name: AZURE_TOKEN
+            value: ${AZURE_TOKEN}
+          - name: QUAY_REGISTRY
+            value: ${QUAY_REGISTRY}
+          - name: QUAY_USER
+            value: ${QUAY_USER}
+          - name: QUAY_PASSWORD
+            value: ${QUAY_PASSWORD}
     triggers:
     - github:
         secret: secret101
@@ -109,3 +123,24 @@ parameters:
   displayName: Nexus Password
   name: NEXUS_PASSWORD
   value: admin123
+- displayName: OVH URL
+  name: OVH_URL
+  value: https://openshift.openhybridcloud.io:8443
+- displayName: OVH Token
+  name: OVH_TOKEN
+  value: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJoeWJyaWQtY2ktY2QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiamVua2lucy10b2tlbi1kcXQyaiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJqZW5raW5zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYTgwNTA2YjYtYzdkMi0xMWU4LThhOTItMDAxYTRhMTYwMTk0Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omh5YnJpZC1jaS1jZDpqZW5raW5zIn0.rlZlp_2xHknQV0yJMyiokCM_5wgjP4b6nhfOYrs2ifAcTxD7lJ01tTDp6EDbtmoBWTPTnGav86woNh1i-tp7CgVUT-4fQO9LbUY8fZp9pbO2_f354FkDKcvsKqmjyw79ckljrj1qDMMlZtTZ6vFU48rEqHeaIOwvFZdSX82xikrS2rguKg0AAihAUPtFuqnAo4Xdhv7QRGlDXJFJgygfHg3T-u5QmovFfKpp7GMYoUPdU2MjW-BrMFbh1DbMNAszYmD-sAurRCT02NyslWeNqcioW4mTERRjfQNEI0tfKBjssdi_zmgSIhZlYJn1etqaIeUmC3dkj0mUweUgN4e4XA
+- displayName: Azure URL
+  name: AZURE_URL
+  value: https://openshift.openhybridcloud.io:8443
+- displayName: Azure Token
+  name: AZURE_TOKEN
+  value: admin1eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJoeWJyaWQtY2ktY2QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiamVua2lucy10b2tlbi1kcXQyaiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJqZW5raW5zIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYTgwNTA2YjYtYzdkMi0xMWU4LThhOTItMDAxYTRhMTYwMTk0Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omh5YnJpZC1jaS1jZDpqZW5raW5zIn0.rlZlp_2xHknQV0yJMyiokCM_5wgjP4b6nhfOYrs2ifAcTxD7lJ01tTDp6EDbtmoBWTPTnGav86woNh1i-tp7CgVUT-4fQO9LbUY8fZp9pbO2_f354FkDKcvsKqmjyw79ckljrj1qDMMlZtTZ6vFU48rEqHeaIOwvFZdSX82xikrS2rguKg0AAihAUPtFuqnAo4Xdhv7QRGlDXJFJgygfHg3T-u5QmovFfKpp7GMYoUPdU2MjW-BrMFbh1DbMNAszYmD-sAurRCT02NyslWeNqcioW4mTERRjfQNEI0tfKBjssdi_zmgSIhZlYJn1etqaIeUmC3dkj0mUweUgN4e4XA23
+- displayName: Quay Registry
+  name: QUAY_REGISTRY
+  value: quay.io/demoforum/coolstore-monolith
+- displayName: Quay user
+  name: QUAY_USER
+  value: demoforum18
+- displayName: Quay Password
+  name: QUAY_PASSWORD
+  value: "#redhat123"
