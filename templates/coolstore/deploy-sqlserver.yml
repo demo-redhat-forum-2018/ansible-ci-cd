@@ -52,8 +52,9 @@ objects:
     strategy:
       type: Recreate
       recreateParams:
+        timeoutSeconds: 600
         post:
-          failurePolicy: ignore
+          failurePolicy: Ignore
           execNewPod:
             containerName: "${SQLSERVER_SERVICE_NAME}" 
             command:
