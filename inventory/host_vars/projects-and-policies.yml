@@ -30,12 +30,6 @@ openshift_cluster_content:
     tags:
     - rolebinding-group
   - name: "mono-dev-acl"
-    namespace: "{{ dev_namespace }}"
-    template: "{{ playbook_dir }}/templates/rolebinding/rolebinding-group.yml"
-    params: "{{ playbook_dir }}/params/rolebinding-group/all"
-    tags:
-    - rolebinding-group
-  - name: "mono-dev-acl"
     namespace: "{{ test_namespace }}"
     template: "{{ playbook_dir }}/templates/rolebinding/rolebinding-group.yml"
     params: "{{ playbook_dir }}/params/rolebinding-group/all"

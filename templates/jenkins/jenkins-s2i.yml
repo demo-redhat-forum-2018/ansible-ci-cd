@@ -101,7 +101,7 @@ parameters:
 - name: SOURCE_REPOSITORY_REF
   displayName: Git Reference
   description: Set this to a branch name, tag or other ref of your repository if you are not using the default (master) branch.
-  default: master
+  default: step-1
 - name: SOURCE_REPOSITORY_CONTEXT_DIR
   displayName: Git Reference
   description: The directory in the source repository where the SonarQube docker build is.
