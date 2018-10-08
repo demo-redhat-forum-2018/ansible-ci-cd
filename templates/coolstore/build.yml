@@ -1,61 +1,138 @@
+apiVersion: template.openshift.io/v1
 kind: Template
-apiVersion: v1
+labels:
+  template: eap71-mssql-binary-s2i
+  xpaas: 1.4.14
+message: A new EAP 7 based application has been created in your project.
 metadata:
   annotations:
-    description: Application template Coolstore Monolith using Git source build
-    iconClass: icon-jboss
-    tags: eap,sqlserver,javaee,java,database,jboss,xpaas
-    version: 1.0.0
-    openshift.io/display-name: Red Hat Forum - Coolstore Monnolith using source build
-  name: coolstore-monolith-sqlserver
-labels:
-  template: coolstore-monolith-sqlserver
-message: The resources (build config, imagestreams, etc) for
-  building the Coolstore Monolith SQL Server has been created in your project.
+    description: An EAP 7 application from WAR, using MS SQLServer.
+    iconClass: icon-eap
+    openshift.io/display-name: JBoss EAP 7.1 Binary (MSSQL Server - no https)
+    openshift.io/provider-display-name: Red Hat, Inc.
+    tags: eap,javaee,java,jboss
+    template.openshift.io/documentation-url: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
+    template.openshift.io/long-description: This template defines resources needed
+      to develop Red Hat Enterprise Application Server 7.1 based application, including
+      a build configuration, application deployment configuration and insecure communication
+      using http.
+    template.openshift.io/support-url: https://access.redhat.com
+    version: 1.4.14
+  name: eap71-mssql-binary-s2i
 objects:
-- kind: ImageStream
-  apiVersion: v1
+- apiVersion: v1
+  kind: ImageStream
   metadata:
-    name: coolstore
     labels:
-      application: coolstore
-      build: coolstore
-- kind: BuildConfig
-  apiVersion: v1
+      application: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+- apiVersion: v1
+  kind: BuildConfig
   metadata:
-    name: coolstore
     labels:
-      application: coolstore
+      application: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
   spec:
-    source:
-      type: Git
-      git:
-        uri: ${COOLSTORE_GIT_REPOSITORY}
-        ref: ${COOLSTORE_GIT_BRANCH}
-    strategy:
-      type: Source
-      sourceStrategy:
-        env:
-        - name: CUSTOM_INSTALL_DIRECTORIES
-          value: /install
-        from:
-          kind: ImageStreamTag
-          namespace: openshift
-          name: jboss-eap71-openshift:1.1
     output:
       to:
         kind: ImageStreamTag
-        namespace: ""
-        name: coolstore:latest
+        name: ${APPLICATION_NAME}:latest
+    source:
+      contextDir: ${CONTEXT_DIR}
+      git:
+        ref: ${SOURCE_REPOSITORY_REF}
+        uri: ${SOURCE_REPOSITORY_URL}
+      type: Git
+    strategy:
+      sourceStrategy:
+        env:
+        - name: MAVEN_MIRROR_URL
+          value: ${MAVEN_MIRROR_URL}
+        - name: MAVEN_ARGS_APPEND
+          value: ${MAVEN_ARGS_APPEND}
+        - name: ARTIFACT_DIR
+          value: ${ARTIFACT_DIR}
+        - name: WAR_FILE_URL
+          value: ${WAR_FILE_URL}
+        - name: WAR_FILE_USER
+          value: ${WAR_FILE_USER}
+        - name: WAR_FILE_PASSWORD
+          value: ${WAR_FILE_PASSWORD}
+        - name: CUSTOM_INSTALL_DIRECTORIES
+          value: '/install'
+        forcePull: true
+        from:
+          kind: ImageStreamTag
+          name: jboss-eap71-mssql-binary:latest
+          namespace: ${IMAGE_STREAM_NAMESPACE}
+      type: Source
     triggers:
-    - type: ImageChange
+    - github:
+        secret: ${GITHUB_WEBHOOK_SECRET}
+      type: GitHub
+    - generic:
+        secret: ${GENERIC_WEBHOOK_SECRET}
+      type: Generic
+    - imageChange: {}
+      type: ImageChange
     - type: ConfigChange
 parameters:
-- displayName: Git Repository for coolstore
-  name: COOLSTORE_GIT_REPOSITORY
-  value: https://github.com/demo-redhat-forum-2018/monolith.git
+- description: The name for the application.
+  displayName: Application Name
+  name: APPLICATION_NAME
   required: true
-- displayName: Git branch for coolstore
-  name: COOLSTORE_GIT_BRANCH
-  value: sqlserver
+  value: coolstore
+- description: The URL of WAR file to deploy
+  displayName: WAR File url
+  name: WAR_FILE_URL
+  value: 'http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/com/redhat/coolstore/monolith/1.1.0/monolith-1.1.0.war'
   required: true
+- description: The user for retrieving WAR File
+  displayName: WAR File user
+  name: WAR_FILE_USER
+- description: The password of user for retrieving WAR File
+  displayName: WAR File password
+  name: WAR_FILE_PASSWORD
+- description: Git source URI for application
+  displayName: Git Repository URL
+  name: SOURCE_REPOSITORY_URL
+  required: false
+  value: https://github.com/demo-redhat-forum-2018/jboss-eap-mssql-drivers
+- description: Git branch/tag reference
+  displayName: Git Reference
+  name: SOURCE_REPOSITORY_REF
+  value: master
+- description: Path within Git project to build; empty for root project directory.
+  displayName: Context Directory
+  name: CONTEXT_DIR
+  value: ''
+- description: GitHub trigger secret
+  displayName: Github Webhook Secret
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: GITHUB_WEBHOOK_SECRET
+  required: true
+- description: Generic build trigger secret
+  displayName: Generic Webhook Secret
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: GENERIC_WEBHOOK_SECRET
+  required: true
+- description: Namespace in which the ImageStreams for Red Hat Middleware images are
+    installed. These ImageStreams are normally installed in the openshift namespace.
+    You should only need to modify this if you've installed the ImageStreams in a
+    different namespace/project.
+  displayName: ImageStream Namespace
+  name: IMAGE_STREAM_NAMESPACE
+  required: true
+  value: openshift
+- description: Maven mirror to use for S2I builds
+  displayName: Maven mirror URL
+  name: MAVEN_MIRROR_URL
+- description: Maven additional arguments to use for S2I builds
+  displayName: Maven Additional Arguments
+  name: MAVEN_ARGS_APPEND
+  value: -Dcom.redhat.xpaas.repo.jbossorg
+- description: List of directories from which archives will be copied into the deployment
+    folder. If unspecified, all archives in /target will be copied.
+  name: ARTIFACT_DIR
