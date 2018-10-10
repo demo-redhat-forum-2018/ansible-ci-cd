@@ -147,11 +147,3 @@ parameters:
   name: SQLSERVER_PORT
   value: "1433"
   required: true
-- displayName: Coolstore image tag to use 
-  name: APP_TAG
-  value: latest
-  required: true
-- displayName: Coolstore imageStream 
-  name: IMAGE_NAMESPACE
-  value: mono-ci-cd
-  required: true

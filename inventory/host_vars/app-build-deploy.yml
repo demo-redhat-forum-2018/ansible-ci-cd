@@ -6,25 +6,19 @@ openshift_cluster_content:
   content:
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver-secret.yml"
-    params: "{{ playbook_dir }}/params/coolstore/deploy-dev"
+    params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
     namespace: "{{ test_namespace }}"
     tags:
     - coolstore-deploy
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver.yml"
-    params: "{{ playbook_dir }}/params/coolstore/deploy-dev"
+    params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
     namespace: "{{ test_namespace }}"
     tags:
     - coolstore-deploy
   - name: coolstore
     template: "{{ playbook_dir }}/templates/coolstore/deploy-coolstore.yml"
     params: "{{ playbook_dir }}/params/coolstore/deploy-dev"
-    namespace: "{{ dev_namespace }}"
-    tags:
-    - coolstore-deploy
-  - name: jenkins-edit-rolebinding
-    template: "{{ playbook_dir }}/templates/rolebinding/jenkins-edit.yml"
-    params: "{{ playbook_dir }}/params/coolstore/role-jenkins"
     namespace: "{{ dev_namespace }}"
     tags:
     - coolstore-deploy
@@ -32,25 +26,19 @@ openshift_cluster_content:
   content:
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver-secret.yml"
-    params: "{{ playbook_dir }}/params/coolstore/deploy-test"
+    params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
     namespace: "{{ test_namespace }}"
     tags:
     - coolstore-deploy
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver.yml"
-    params: "{{ playbook_dir }}/params/coolstore/deploy-test"
+    params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
     namespace: "{{ test_namespace }}"
     tags:
     - coolstore-deploy
   - name: coolstore
     template: "{{ playbook_dir }}/templates/coolstore/deploy-coolstore.yml"
     params: "{{ playbook_dir }}/params/coolstore/deploy-test"
-    namespace: "{{ test_namespace }}"
-    tags:
-    - coolstore-deploy
-  - name: jenkins-edit-rolebinding
-    template: "{{ playbook_dir }}/templates/rolebinding/jenkins-edit.yml"
-    params: "{{ playbook_dir }}/params/coolstore/role-jenkins"
     namespace: "{{ test_namespace }}"
     tags:
     - coolstore-deploy
