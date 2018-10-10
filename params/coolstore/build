@@ -1,4 +1,4 @@
-SOURCE_REPOSITORY_URL=https://github.com/demo-redhat-forum-2018/monolith.git
+SOURCE_REPOSITORY_URL=https://github.com/demo-redhat-forum-2018/jboss-eap-mssql-drivers
 SOURCE_REPOSITORY_REF=sqlserver
 EXTERNAL_REGISTRY=quay.io/demoforum/coolstore-monolith
 WAR_FILE_URL=http://gitux01.openhybridcloud.io:8081/repository/coolstore-monolith/com/redhat/coolstore/monolith/1.1.0/monolith-1.1.0.war
