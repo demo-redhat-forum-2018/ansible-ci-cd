@@ -18,4 +18,4 @@ ansible-galaxy install -r requirements.yml --roles-path=roles
 ansible-playbook apply.yml -i inventory/ -e target=bootstrap
 ansible-playbook apply.yml -i inventory/ -e target=apps
 
-git checkout step-master
+git checkout master
