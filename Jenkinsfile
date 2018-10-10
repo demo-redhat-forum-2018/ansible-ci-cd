@@ -113,7 +113,7 @@ node('jenkins-slave-skopeo') {
         promoteImage(newVersion,"promoteToTest")
 
         // Trigger a new deployment
-        openshift.withCluster("azure", azureToken) {
+        openshift.withCluster("azure", azureToken.toString()) {
             openshift.withProject(openShiftTestEnv) {
                 def dc = openshift.selector('dc', 'coolstore')
                 dc.rollout().latest();
