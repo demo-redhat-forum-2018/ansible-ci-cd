@@ -7,13 +7,13 @@ openshift_cluster_content:
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver-secret.yml"
     params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
-    namespace: "{{ test_namespace }}"
+    namespace: "{{ dev_namespace }}"
     tags:
     - coolstore-deploy
   - name: sqlserver
     template: "{{ playbook_dir }}/templates/coolstore/deploy-sqlserver.yml"
     params: "{{ playbook_dir }}/params/coolstore/deploy-sqlserver"
-    namespace: "{{ test_namespace }}"
+    namespace: "{{ dev_namespace }}"
     tags:
     - coolstore-deploy
   - name: coolstore
