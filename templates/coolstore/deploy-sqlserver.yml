@@ -50,7 +50,7 @@ objects:
                 - /bin/sh
                 - '-c'
                 - >-
-                  sleep 30 && /opt/mssql-tools/bin/sqlcmd -U sa -P ${SA_PASSWORD} -S
+                  /opt/mssql-tools/bin/sqlcmd -U sa -P ${SA_PASSWORD} -S
                   sqlserver -Q "CREATE DATABASE ${DATABASE_NAME}"
               containerName: sqlserver
             failurePolicy: Ignore
