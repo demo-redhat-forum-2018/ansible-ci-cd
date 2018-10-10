@@ -1,4 +1,4 @@
-APP_TAG=promoteToTest
+APP_TAG=latest
 IMAGE_NAMESPACE=mono-ci-cd
 SQLSERVER_SERVICE_NAME=sqlserver
 SQLSERVER_PASSWORD=Redhat123
