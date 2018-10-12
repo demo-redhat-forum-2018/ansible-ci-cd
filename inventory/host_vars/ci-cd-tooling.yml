@@ -3,14 +3,8 @@ ansible_connection: local
 openshift_cluster_content:
 - object: ci-cd-tooling
   content:
-    - name: "jenkins"
-      namespace: "{{ ci_cd_namespace }}"
-      template: "{{ playbook_dir }}/templates/jenkins/jenkins.yml"
-      params: "{{ playbook_dir }}/params/jenkins/jenkins"
-      tags:
-      - jenkins
     - name: "jenkins-s2i"
-      namespace: "{{ ci_cd_namespace }}"
+      namespace: "{{ openshift_namespace }}"
       template: "{{ playbook_dir }}/templates/jenkins/jenkins-s2i.yml"
       params: "{{ playbook_dir }}/params/jenkins/jenkins-s2i"
       tags:
@@ -20,7 +14,7 @@ openshift_cluster_content:
   - name: jenkins-slave-skopeo
     template: "{{ playbook_dir }}/templates/jenkins/jenkins-slave-generic-template.yml"
     params: "{{ playbook_dir }}/params/jenkins/slave-skopeo"
-    namespace: "{{ ci_cd_namespace }}"
+    namespace: "{{ openshift_namespace }}"
     tags:
     - jenkins-slaves
     - slave-skopeo

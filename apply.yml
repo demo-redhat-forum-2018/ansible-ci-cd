@@ -2,10 +2,7 @@
 - name: Deploy {{ target }} 
   hosts: "{{ target }}"
   vars:
-    ci_cd_namespace: mono-ci-cd
-    dev_namespace: mono-dev
-    test_namespace: mono-test
-    prod_namespace: mono-prod
+    openshift_namespace: openshift
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
