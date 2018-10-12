@@ -72,7 +72,7 @@ node('maven') {
 
     // Using Mav build the war file
     stage('Build war file') {
-        sh "mvn -s mvn-settings.xml clean install -DskipTests=true"
+        sh "mvn -s mvn-settings.xml clean install -B -DskipTests=true"
     }         
     
     // Using Maven run the unit tests
