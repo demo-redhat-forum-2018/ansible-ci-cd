@@ -27,8 +27,6 @@ node('maven') {
 
     stage ("Get Source code"){
         echo '*** Build starting ***'
-        def mvn = "mvn -s mvn-settings.xml"
-        sh "mvn --version"
         git url : 'https://github.com/demo-redhat-forum-2018/monolith.git'
                   
         //write Nexus configfile
@@ -73,7 +71,7 @@ node('maven') {
     }
 
     stage('Publish to Nexus') {
-        sh "mvn -s mvn-settings.xml deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::${params.NEXUS_REPO_URL}"
+        sh "mvn -s mvn-settings.xml deploy -B -DskipTests=true -DaltDeploymentRepository=nexus::default::${params.NEXUS_REPO_URL}"
     }
 
     stage('Build OpenShift Image') {
