@@ -8,7 +8,7 @@ openshift_cluster_content:
     template_action: create
     params: "{{ playbook_dir }}/params/projectrequests/project-requests-ci-cd"
     tags:
-    - projects
+    - cicd_project
   - name: "{{ test_namespace }}"
     template: "{{ playbook_dir }}/templates/project-requests.yml"
     template_action: create
