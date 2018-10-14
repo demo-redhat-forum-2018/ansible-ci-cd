@@ -19,3 +19,5 @@ ansible-playbook apply.yml -i inventory/ -e target=bootstrap
 ansible-playbook apply.yml -i inventory/ -e target=apps
 
 git checkout master
+
+rm -rf roles
