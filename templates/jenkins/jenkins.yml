@@ -194,7 +194,7 @@ objects:
         <containers>
           <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
             <name>jnlp</name>
-            <image>openshift/jenkins-slave-skopeo</image>
+            <image>docker-registry.default.svc:5000/openshift/jenkins-slave-skopeo:latest</image>
             <privileged>false</privileged>
             <alwaysPullImage>false</alwaysPullImage>
             <workingDir>/tmp</workingDir>
