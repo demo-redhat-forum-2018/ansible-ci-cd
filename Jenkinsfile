@@ -176,6 +176,9 @@ node('jenkins-slave-skopeo') {
                 } else {
                     openshift.set("route-backends", "coolstore", "coolstore-blue=0%", "coolstore-green=100%")
                 }
+
+                def appRoute = "http://" + openshift.selector('route', 'coolstore').object().spec.host
+                slackSend channel: 'monolith', color: 'good', message: "--- Prod Application Deployed --- \n OCP Cluster target : ${env.OVH_URL}\n Namespace: ${params.OPENSHIFT_PROD_ENVIRONMENT} \n Access <${appRoute}|App> \n ---"
             }
         }
         slackSend channel: 'monolith', color: 'good', message: " --- Pipeline Terminated --- \n Check <${env.RUN_DISPLAY_URL}|Build logs>\n ---"
