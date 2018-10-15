@@ -1,5 +1,5 @@
 SOURCE_REPOSITORY_URL=https://github.com/demo-redhat-forum-2018/ansible-ci-cd.git
-NAME=jenkins
+NAME=jenkins-forum
 SOURCE_REPOSITORY_CONTEXT_DIR=jenkins-s2i
 IMAGE_STREAM_NAMESPACE=openshift
 SOURCE_REPOSITORY_REF=step-0
