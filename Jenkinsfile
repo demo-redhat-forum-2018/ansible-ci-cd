@@ -153,8 +153,6 @@ node('jenkins-slave-skopeo') {
                 dc.rollout().latest();
                 dc.rollout().status();
 
-                def appRoute = "http://" + openshift.selector('route', 'coolstore').object().spec.host
-                slackSend channel: 'monolith', color: 'good', message: "--- Test Application Deployed --- \n OCP Cluster target : ${env.OVH_URL}\n Namespace: ${params.OPENSHIFT_TEST_ENVIRONMENT} \n Access <${appRoute}|App> \n ---"
             }
         }
     }
