@@ -1,6 +1,4 @@
-# Open Innovation Labs Enablement CI/CD Exercise
-
-Repository hosts the Labs Enablement material. It is a working skeleton that learners will use in conjunction with the [enablement-docs](https://github.com/rht-labs/enablement-docs).
+# Ansible CI/CD repository for Red Hat Forum
 
 ### Basic usage
 
